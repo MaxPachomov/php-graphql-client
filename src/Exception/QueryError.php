@@ -26,6 +26,9 @@ class QueryError extends RuntimeException
     public function __construct($errorDetails)
     {
         $this->errorDetails = $errorDetails['errors'];
+        if (!array_key_exists('message', $this->errorDetails)) {
+            $this->errorDetails = current($this->errorDetails);
+        }
         parent::__construct($this->errorDetails['message']);
     }
 
